@@ -1,0 +1,213 @@
+<?xml version='1.0'?>
+
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find my_robot)/urdf/my_robot.gazebo" />
+
+  <link name="robot_footprint"></link>
+  <joint name="robot_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="robot_footprint"/>
+    <child link="chassis" />
+  </joint>
+
+  <link name='chassis'>
+    <pose>0 0 0.1 0 0 0</pose>
+
+    <inertial>
+      <mass value="30.0"/>
+      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="1.975" ixy="0" ixz="0"
+          iyy="1.975" iyz="0"
+          izz="3.75"
+      />
+    </inertial>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <geometry>
+        <cylinder radius=".5" length=".2"/>
+      </geometry>
+    </collision>
+
+    <visual name='chassis_visual'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <cylinder radius=".5" length=".2"/>
+      </geometry>
+    </visual>
+
+    <collision name='body_tower'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size="0.5 0.5 1"/>
+      </geometry>
+    </collision>
+
+    <visual name='body_tower'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size="0.5 0.5 1"/>
+      </geometry>
+    </visual>
+    
+    <collision name='back_caster_collision'>
+      <origin xyz="0.45 0 -0.05" rpy=" 0 0 0"/>
+      <geometry>
+        <sphere radius="0.0499"/>
+      </geometry>
+    </collision>
+
+    <visual name='back_caster_visual'>
+      <origin xyz="0.45 0 -0.05" rpy=" 0 0 0"/>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+
+  </link>
+  <link name="left_wheel">
+    <inertial>
+      <mass value="5.0"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.033" ixy="0" ixz="0"
+          iyy="0.033" iyz="0"
+          izz="0.00625" 
+      />
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
+      <geometry>
+        <cylinder radius=".25" length=".1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius=".25" length=".1"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="right_wheel">
+    <inertial>
+      <mass value="5.0"/>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+      <inertia
+          ixx="0.033" ixy="0" ixz="0"
+          iyy="0.033" iyz="0"
+          izz="0.00625"
+      />
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
+      <geometry>
+        <cylinder radius=".25" length=".1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius=".25" length=".1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <xacro:macro name="box_inertia" params="m w h d">
+    <inertial>
+      <mass value="${m}"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </xacro:macro>
+
+  <link name="camera">
+    <xacro:box_inertia m="0.1" w="0.05" h="0.05" d="0.05"/>
+    <inertial>
+      
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="hokuyo">
+    <inertial>
+      <mass value="1e-5"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="1e-6" ixy="0" ixz="0"
+          iyy="1e-6" iyz="0"
+          izz="1e-6"
+      />
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+     <visual>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry> 
+      <mesh filename="file:///home/workspace/EllaCM/catkin_ws/src/my_robot/meshes/hokuyo.dae"/>
+      </geometry>
+     </visual>
+  </link>
+  
+    <joint type="continuous" name="left_wheel_hinge">
+        <origin xyz="0 0.6 0" rpy="0 0 0"/>
+        <child link="left_wheel"/>
+        <parent link="chassis"/>
+        <axis xyz="0 1 0" rpy="0 0 0"/>
+        <limit effort="10000" velocity="1000"/>
+        <dynamics damping="1.0" friction="1.0"/>
+    </joint>
+  
+    <joint type="continuous" name="right_wheel_hinge">
+        <origin xyz="0 -1 0" rpy="0 0 0"/>
+        <child link="right_wheel"/>
+        <parent link="chassis"/>
+        <axis xyz="0 -0.6 0" rpy="0 0 0"/>
+        <limit effort="10000" velocity="1000"/>
+        <dynamics damping="1.0" friction="1.0"/>
+    </joint>
+
+    <joint type="fixed" name="camera_joint">
+        <origin xyz="0.5 0 0.1" rpy="0 0 0"/>
+        <child link="camera"/>
+        <parent link="chassis"/>
+        <axis xyz="0 1 0" rpy="0 0 0"/>
+    
+    </joint>
+
+    <joint type="fixed" name="hokuyo_joint">
+        <origin xyz="0 0 1.2" rpy="0 0 0"/>
+        <child link="hokuyo"/>
+        <parent link="chassis"/>
+        <axis xyz="0 1 0" rpy="0 0 0"/>
+    
+    </joint>
+  
+  
+
+</robot>
