@@ -11,15 +11,15 @@
   </joint>
 
   <link name='chassis'>
-    <pose>0 0 0.1 0 0 0</pose>
+    <pose>0 0 -0.1 0 0 0</pose>
 
     <inertial>
-      <mass value="30.0"/>
-      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <mass value="20.0"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <inertia
-          ixx="1.975" ixy="0" ixz="0"
-          iyy="1.975" iyz="0"
-          izz="3.75"
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="0.5" iyz="0"
+          izz="0.5"
       />
     </inertial>
 
@@ -31,37 +31,51 @@
     </collision>
 
     <visual name='chassis_visual'>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <origin xyz="0 0 -0.1" rpy=" 0 0 0"/>
       <geometry>
         <cylinder radius=".5" length=".2"/>
       </geometry>
     </visual>
 
     <collision name='body_tower'>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <origin xyz="0 0 0.3" rpy=" 0 0 0"/>
       <geometry>
         <box size="0.5 0.5 1"/>
       </geometry>
     </collision>
 
     <visual name='body_tower'>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <origin xyz="0 0 0.3" rpy=" 0 0 0"/>
       <geometry>
         <box size="0.5 0.5 1"/>
       </geometry>
     </visual>
     
     <collision name='back_caster_collision'>
-      <origin xyz="0.45 0 -0.05" rpy=" 0 0 0"/>
+      <origin xyz="0.35 0 -0.22" rpy=" 0 0 0"/>
       <geometry>
-        <sphere radius="0.0499"/>
+        <sphere radius="0.15"/>
       </geometry>
     </collision>
 
     <visual name='back_caster_visual'>
-      <origin xyz="0.45 0 -0.05" rpy=" 0 0 0"/>
+      <origin xyz="0.35 0 -0.22" rpy=" 0 0 0"/>
       <geometry>
-        <sphere radius="0.05"/>
+        <sphere radius="0.15"/>
+      </geometry>
+    </visual>
+
+    <collision name='front_caster_collision'>
+      <origin xyz="-0.35 0 -0.22" rpy=" 0 0 0"/>
+      <geometry>
+        <sphere radius="0.15"/>
+      </geometry>
+    </collision>
+
+    <visual name='front_caster_visual'>
+      <origin xyz="-0.35 0 -0.22" rpy=" 0 0 0"/>
+      <geometry>
+        <sphere radius="0.15"/>
       </geometry>
     </visual>
 
@@ -71,9 +85,9 @@
       <mass value="5.0"/>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <inertia
-          ixx="0.033" ixy="0" ixz="0"
-          iyy="0.033" iyz="0"
-          izz="0.00625" 
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1" 
       />
     </inertial>
 
@@ -97,9 +111,9 @@
       <mass value="5.0"/>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <inertia
-          ixx="0.033" ixy="0" ixz="0"
-          iyy="0.033" iyz="0"
-          izz="0.00625"
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
       />
     </inertial>
 
@@ -175,7 +189,7 @@
   </link>
   
     <joint type="continuous" name="left_wheel_hinge">
-        <origin xyz="0 0.6 0" rpy="0 0 0"/>
+        <origin xyz="0 0.5 -0.125" rpy="0 0 0"/>
         <child link="left_wheel"/>
         <parent link="chassis"/>
         <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -184,16 +198,16 @@
     </joint>
   
     <joint type="continuous" name="right_wheel_hinge">
-        <origin xyz="0 -1 0" rpy="0 0 0"/>
+        <origin xyz="0 -0.5 -0.125" rpy="0 0 0"/>
         <child link="right_wheel"/>
         <parent link="chassis"/>
-        <axis xyz="0 -0.6 0" rpy="0 0 0"/>
+        <axis xyz="0 -1 0" rpy="0 0 0"/>
         <limit effort="10000" velocity="1000"/>
         <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <joint type="fixed" name="camera_joint">
-        <origin xyz="0.5 0 0.1" rpy="0 0 0"/>
+        <origin xyz="0.5 0 0" rpy="0 0 0"/>
         <child link="camera"/>
         <parent link="chassis"/>
         <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -201,7 +215,7 @@
     </joint>
 
     <joint type="fixed" name="hokuyo_joint">
-        <origin xyz="0 0 1.2" rpy="0 0 0"/>
+        <origin xyz="0 0 1.5" rpy="0 0 0"/>
         <child link="hokuyo"/>
         <parent link="chassis"/>
         <axis xyz="0 1 0" rpy="0 0 0"/>
