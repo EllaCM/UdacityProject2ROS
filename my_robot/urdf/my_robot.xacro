@@ -52,28 +52,28 @@
     </visual>
     
     <collision name='back_caster_collision'>
-      <origin xyz="0.35 0 -0.22" rpy=" 0 0 0"/>
+      <origin xyz="0.35 0 -0.23" rpy=" 0 0 0"/>
       <geometry>
         <sphere radius="0.15"/>
       </geometry>
     </collision>
 
     <visual name='back_caster_visual'>
-      <origin xyz="0.35 0 -0.22" rpy=" 0 0 0"/>
+      <origin xyz="0.35 0 -0.23" rpy=" 0 0 0"/>
       <geometry>
         <sphere radius="0.15"/>
       </geometry>
     </visual>
 
     <collision name='front_caster_collision'>
-      <origin xyz="-0.35 0 -0.22" rpy=" 0 0 0"/>
+      <origin xyz="-0.35 0 -0.23" rpy=" 0 0 0"/>
       <geometry>
         <sphere radius="0.15"/>
       </geometry>
     </collision>
 
     <visual name='front_caster_visual'>
-      <origin xyz="-0.35 0 -0.22" rpy=" 0 0 0"/>
+      <origin xyz="-0.35 0 -0.23" rpy=" 0 0 0"/>
       <geometry>
         <sphere radius="0.15"/>
       </geometry>
@@ -118,7 +118,7 @@
     </inertial>
 
     <collision>
-      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
+      <origin xyz="0 0.1 0" rpy=" 0 1.5707 1.5707"/> 
       <geometry>
         <cylinder radius=".25" length=".1"/>
       </geometry>
@@ -176,14 +176,14 @@
     <collision>
       <origin xyz="0 0 0" rpy=" 0 0 0"/> 
       <geometry>
-        <box size="0.1 0.1 0.1"/>
+        <box size="0.5 0.5 0.5"/>
       </geometry>
     </collision>
 
      <visual>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry> 
-      <mesh filename="file:///home/workspace/EllaCM/catkin_ws/src/my_robot/meshes/hokuyo.dae"/>
+        <mesh filename="file:///home/workspace/EllaCM/catkin_ws/src/UdacityProject2ROS/my_robot/meshes/hokuyo.dae"/>
       </geometry>
      </visual>
   </link>
@@ -215,7 +215,7 @@
     </joint>
 
     <joint type="fixed" name="hokuyo_joint">
-        <origin xyz="0 0 1.5" rpy="0 0 0"/>
+        <origin xyz="0 0 0.8" rpy="0 0 0"/>
         <child link="hokuyo"/>
         <parent link="chassis"/>
         <axis xyz="0 1 0" rpy="0 0 0"/>
