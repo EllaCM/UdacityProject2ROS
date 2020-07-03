@@ -7,7 +7,7 @@ ros::Publisher motor_command_publisher;
 
 bool handle_drive_request(ball_chaser::DriveToTarget::Request &req, ball_chaser::DriveToTarget::Response &res)
 {	
-	ROS_INFO("DriveToTarget_request recieved - lx:%1.2f, az:%1.2f, (float)req.linear_x, (float)req.angular_z");
+	ROS_INFO("DriveToTarget_request recieved - lx:%1.2f, az:%1.2f", (double)req.linear_x, (double)req.angular_z);
 	
 	std_msgs::Float64 l_x, a_z;
 	l_x.data = req.linear_x;
