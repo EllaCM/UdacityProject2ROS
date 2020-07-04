@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "drive_bot");
 	ros::NodeHandle n;
 	//"/cmd_vel"is the ros actuation topic that the message will be publish on
-	motor_command_publisher = n.advertise<geometry_msgs::Twist>("/cmd_vel",10);
+	motor_command_publisher = n.advertise<geometry_msgs::Twist>("/differential_drive_controller/cmd_vel",10);
 	
 	ros::ServiceServer service = n.advertiseService("/ball_chaser/command_robot", handle_drive_request);
 	ROS_INFO("Ready to send motor commands");
