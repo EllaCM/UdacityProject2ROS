@@ -36,6 +36,9 @@ void process_image_callback(const sensor_msgs::Image img){
       drive_bot(0.5, 0.5);
       white_ball = true;
       break;
+    } else {
+      drive_bot(0.0, 0.0);
+      white_ball = false;
     }
   }
 
