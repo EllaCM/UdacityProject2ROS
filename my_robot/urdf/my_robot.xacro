@@ -38,7 +38,7 @@
     </visual>
 
     <collision name='body_tower'>
-      <origin xyz="0 0 -0.0" rpy=" 0 0 0"/>
+      <origin xyz="0 0 0.35" rpy=" 0 0 0"/>
       <geometry>
         <box size="0.5 0.5 0.8"/>
       </geometry>
@@ -52,28 +52,28 @@
     </visual>
     
     <collision name='back_caster_collision'>
-      <origin xyz="0.35 0 -0.065" rpy=" 0 0 0"/>
+      <origin xyz="0.35 0 -0.31" rpy=" 0 0 0"/>
       <geometry>
         <sphere radius="0.184"/>
       </geometry>
     </collision>
 
     <visual name='back_caster_visual'>
-      <origin xyz="0.35 0 -0.065" rpy=" 0 0 0"/>
+      <origin xyz="0.35 0 -0.31" rpy=" 0 0 0"/>
       <geometry>
         <sphere radius="0.185"/>
       </geometry>
     </visual>
 
     <collision name='front_caster_collision'>
-      <origin xyz="-0.35 0 -0.065" rpy=" 0 0 0"/>
+      <origin xyz="-0.35 0 -0.31" rpy=" 0 0 0"/>
       <geometry>
         <sphere radius="0.184"/>
       </geometry>
     </collision>
 
     <visual name='front_caster_visual'>
-      <origin xyz="-0.35 0 -0.065" rpy=" 0 0 0"/>
+      <origin xyz="-0.35 0 -0.31" rpy=" 0 0 0"/>
       <geometry>
         <sphere radius="0.185"/>
       </geometry>
@@ -189,7 +189,7 @@
   </link>
   
     <joint type="continuous" name="left_wheel_hinge">
-        <origin xyz="0 0.6 0" rpy="0 0 0"/>
+        <origin xyz="0 0.6 -0.25" rpy="0 0 0"/>
         <child link="left_wheel"/>
         <parent link="chassis"/>
         <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -198,7 +198,7 @@
     </joint>
   
     <joint type="continuous" name="right_wheel_hinge">
-        <origin xyz="0 -0.6 0" rpy="0 0 0"/>
+        <origin xyz="0 -0.6 -0.25" rpy="0 0 0"/>
         <child link="right_wheel"/>
         <parent link="chassis"/>
         <axis xyz="0 -1 0" rpy="0 0 0"/>
