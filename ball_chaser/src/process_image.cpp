@@ -25,7 +25,7 @@ void process_image_callback(const sensor_msgs::Image img){
   {
     int pos = i%img.step;
     if(img.data[i]==white_pixel && 0<=pos<left_center_bdr){
-      drive_bot(0.5, -0.5);
+      drive_bot(0.5, 0.2);
       white_ball = true;
       break;
     } else if(img.data[i]==white_pixel && left_center_bdr<=pos<right_center_bdr){
@@ -33,7 +33,7 @@ void process_image_callback(const sensor_msgs::Image img){
       white_ball = true;
       break;
     } else if(img.data[i]==white_pixel && right_center_bdr<=pos<=img.step){
-      drive_bot(0.5, 0.5);
+      drive_bot(0.5, -0.2);
       white_ball = true;
       break;
     } else {
