@@ -25,7 +25,7 @@ void process_image_callback(const sensor_msgs::Image img){
   for (int i=0.5*img.height*img.step; i<img.height*img.step; i++)
   {
     
-    if(img.data[i]==(255, 255, 255)){
+    if(img.data[i]==255){
      	 pos = i%img.step;
     	 row = i/img.height;
     	 white_ball = true;
